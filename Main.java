@@ -28,6 +28,8 @@ public class Main {
                 + analyzer.hasDigit(password));
         System.out.println("Has Symbol: "
                 + analyzer.hasSpecialCharacter(password));
+        System.out.println("Contains Common Password: "
+                + analyzer.containsCommonPassword(password));
 
         System.out.println("Score: "
                 + report.getScore()
