@@ -32,6 +32,8 @@ public class Main {
                 + analyzer.containsCommonPassword(password));
         System.out.println("Contains Sequence: "
                 + analyzer.hasSequence(password));
+        System.out.println("Contains Repeated Characters: "
+                + analyzer.hasRepeatedCharacters(password));
 
         System.out.println("Score: "
                 + report.getScore()

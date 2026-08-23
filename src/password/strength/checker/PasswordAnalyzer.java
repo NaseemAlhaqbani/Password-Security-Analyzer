@@ -104,6 +104,21 @@ public class PasswordAnalyzer {
         return false;
     }
 
+    //7
+    public boolean hasRepeatedCharacters(String password) {
+
+        password = password.toLowerCase();
+
+        for (int i = 0; i < password.length() - 1; i++) {
+
+            if (password.charAt(i) == password.charAt(i + 1)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public int calculateScore(String password) {
 
         int score = 0;
@@ -133,6 +148,10 @@ public class PasswordAnalyzer {
         }
 
         if (!hasSequence(password)) {
+            score += 5;
+        }
+
+        if (!hasRepeatedCharacters(password)) {
             score += 10;
         }
 
@@ -199,6 +218,10 @@ public class PasswordAnalyzer {
 
         if (hasSequence(password)) {
             feedback += "- Avoid sequential patterns such as abc or 123.\n";
+        }
+
+        if (hasRepeatedCharacters(password)) {
+            feedback += "- Avoid repeated characters such as aa or 11.\n";
         }
 
         if (feedback.isEmpty()) {
