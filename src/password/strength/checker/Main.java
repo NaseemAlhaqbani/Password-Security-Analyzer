@@ -12,6 +12,7 @@ public class Main {
         String password = scanner.nextLine();
 
         PasswordAnalyzer analyzer = new PasswordAnalyzer();
+        PasswordGenerator generator = new PasswordGenerator();
 
         if (analyzer.isLengthValid(password)) {
             System.out.println("Length Check: PASS");
@@ -44,5 +45,14 @@ public class Main {
 
         System.out.println("\nFeedback:");
         System.out.println(report.getFeedback());
+
+        if (report.getScore() < 70) {
+            System.out.println("\nSuggested Password:");
+            System.out.println(
+                    generator.generatePassword(12)
+            );
+        }
+        
+
     }
 }
