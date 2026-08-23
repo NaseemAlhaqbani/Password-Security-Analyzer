@@ -77,6 +77,33 @@ public class PasswordAnalyzer {
         return false;
     }
 
+    //6
+    public boolean hasSequence(String password) {
+
+        password = password.toLowerCase();
+
+        for (int i = 0; i < password.length() - 2; i++) {
+
+            char first = password.charAt(i);
+            char second = password.charAt(i + 1);
+            char third = password.charAt(i + 2);
+
+            boolean ascending
+                    = second == first + 1
+                    && third == second + 1;
+
+            boolean descending
+                    = second == first - 1
+                    && third == second - 1;
+
+            if (ascending || descending) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public int calculateScore(String password) {
 
         int score = 0;
@@ -102,7 +129,11 @@ public class PasswordAnalyzer {
         }
 
         if (!containsCommonPassword(password)) {
-            score += 20;
+            score += 10;
+        }
+
+        if (!hasSequence(password)) {
+            score += 10;
         }
 
         return score;
@@ -164,6 +195,10 @@ public class PasswordAnalyzer {
 
         if (containsCommonPassword(password)) {
             feedback += "- Password contains a common or predictable word.\n";
+        }
+
+        if (hasSequence(password)) {
+            feedback += "- Avoid sequential patterns such as abc or 123.\n";
         }
 
         if (feedback.isEmpty()) {

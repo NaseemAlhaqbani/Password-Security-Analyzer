@@ -30,6 +30,8 @@ public class Main {
                 + analyzer.hasSpecialCharacter(password));
         System.out.println("Contains Common Password: "
                 + analyzer.containsCommonPassword(password));
+        System.out.println("Contains Sequence: "
+                + analyzer.hasSequence(password));
 
         System.out.println("Score: "
                 + report.getScore()
