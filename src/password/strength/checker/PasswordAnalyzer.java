@@ -152,7 +152,7 @@ public class PasswordAnalyzer {
         }
 
         if (!hasRepeatedCharacters(password)) {
-            score += 10;
+            score += 5;
         }
 
         return score;

@@ -7,43 +7,79 @@ public class Main {
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
+        
+        System.out.println("\u001B[44m" + "========================================");
+        System.out.println("\u001B[44m" + "      PASSWORD SECURITY ANALYZER        ");
+        System.out.println("\u001B[44m" + "========================================");
 
         System.out.print("Enter Password: ");
         String password = scanner.nextLine();
 
         PasswordAnalyzer analyzer = new PasswordAnalyzer();
         PasswordGenerator generator = new PasswordGenerator();
-
-        if (analyzer.isLengthValid(password)) {
-            System.out.println("Length Check: PASS");
-        } else {
-            System.out.println("Length Check: FAIL");
-        }
-
         PasswordReport report = analyzer.analyzePassword(password);
-        System.out.println("Has Uppercase: "
-                + analyzer.hasUpperCase(password));
-        System.out.println("Has Lowercase: "
-                + analyzer.hasLowerCase(password));
-        System.out.println("Has Digit: "
-                + analyzer.hasDigit(password));
-        System.out.println("Has Symbol: "
-                + analyzer.hasSpecialCharacter(password));
-        System.out.println("Contains Common Password: "
-                + analyzer.containsCommonPassword(password));
-        System.out.println("Contains Sequence: "
-                + analyzer.hasSequence(password));
-        System.out.println("Contains Repeated Characters: "
-                + analyzer.hasRepeatedCharacters(password));
 
-        System.out.println("Score: "
-                + report.getScore()
-                + "/100");
+      
 
-        System.out.println("Strength Level: "
+        System.out.println("\nPassword Score : "
+                + report.getScore() + "/100");
+
+        System.out.println("Strength Level : "
                 + report.getStrength());
 
-        System.out.println("\nFeedback:");
+        System.out.println("\nSecurity Checks:-");
+        System.out.println("----------------------------------------");
+
+        System.out.println(
+                analyzer.isLengthValid(password)
+                ? "[PASS] Minimum Length"
+                : "[FAIL] Minimum Length"
+        );
+
+        System.out.println(
+                analyzer.hasUpperCase(password)
+                ? "[PASS] Contains Uppercase Letter"
+                : "[FAIL] Contains Uppercase Letter"
+        );
+
+        System.out.println(
+                analyzer.hasLowerCase(password)
+                ? "[PASS] Contains Lowercase Letter"
+                : "[FAIL] Contains Lowercase Letter"
+        );
+
+        System.out.println(
+                analyzer.hasDigit(password)
+                ? "[PASS] Contains Number"
+                : "[FAIL] Contains Number"
+        );
+
+        System.out.println(
+                analyzer.hasSpecialCharacter(password)
+                ? "[PASS] Contains Special Character"
+                : "[FAIL] Contains Special Character"
+        );
+
+        System.out.println(
+                !analyzer.containsCommonPassword(password)
+                ? "[PASS] No Common Password"
+                : "[FAIL] Common Password Detected"
+        );
+
+        System.out.println(
+                !analyzer.hasSequence(password)
+                ? "[PASS] No Sequential Pattern"
+                : "[FAIL] Sequential Pattern Detected"
+        );
+
+        System.out.println(
+                !analyzer.hasRepeatedCharacters(password)
+                ? "[PASS] No Repeated Characters"
+                : "[FAIL] Repeated Characters Detected"
+        );
+
+        System.out.println("\nFeedback");
+        System.out.println("----------------------------------------");
         System.out.println(report.getFeedback());
 
         if (report.getScore() < 70) {
@@ -52,7 +88,6 @@ public class Main {
                     generator.generatePassword(12)
             );
         }
-        
 
     }
 }
